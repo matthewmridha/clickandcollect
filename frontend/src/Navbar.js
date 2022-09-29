@@ -15,7 +15,7 @@ import Login from '@mui/icons-material/Login';
 import Link from '@mui/material/Link';
 import SettingsRoundedIcon from '@mui/icons-material/SettingsRounded';
 
-import logo from './decathlonc&clogo.png'
+import logo from './logo.png'
 
 import {ThemeContext, FunctionContext, StateContext} from './App'
 

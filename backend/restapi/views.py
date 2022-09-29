@@ -1,5 +1,6 @@
 
 import decimal
+from decouple import config
 # Create your views here.
 from django.shortcuts import render
 from users.models import Profile
@@ -27,7 +28,7 @@ from django.http import HttpResponse
 
 # SEND EMAIL
 def email( subject, message, to_email ):
-    from_email = "care.dhaka@decathlon.com"
+    from_email = "test@email.com"
     send_mail(
         subject, 
         message, 
@@ -206,8 +207,8 @@ def update_items(request):
     updated = 0
     skipped = 0
     response = requests.get(
-        'http://103.123.11.189/Decathlon/api/Product/10001/', 
-        headers={'Authorization':'matthew:nsoYWY6Fh/8QtRS1R2o7AQ=='}
+        config('APIURL'),
+        headers={'Authorization':config('APIKEY')}
     )
     if response.status_code == 200:
         data_set = response.json()
