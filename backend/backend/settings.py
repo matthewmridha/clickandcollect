@@ -38,11 +38,26 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'rest_framework',
+    'rest_framework.authtoken',
+    'dj_rest_auth',
+
+    'backend',
+    'restapi',
+    'users',
+
+    'drf_multiple_model',
+    'reset_migrations',
+    'corsheaders',
+    'django_filters',
+    'drf_yasg',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -74,16 +89,35 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
+#DATABASES = {
+#    'default': {
+#
+#        'ENGINE': 'django.db.backends.postgresql',
+
+#        'NAME': 'postgres',
+
+#        'USER': 'postgres',
+
+#        'PASSWORD': 'postgres',
+
+#        'HOST': 'db',
+
+#        'PORT': '5432',
+# e   }
+#d}
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': 'mydatabase',
     }
 }
 
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
+
+AUTH_USER_MODEL = 'backend.User'
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -122,3 +156,48 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        
+       
+    ),
+    'DATETIME_FORMAT': "%d-%b-%Y %H:%M:%S",
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10
+}
+
+REST_USE_JWT = False
+LOGOUT_ON_PASSWORD_CHANGE = False
+OLD_PASSWORD_FIELD_ENABLED = True
+JWT_AUTH_COOKIE = 'access_token'
+JWT_AUTH_REFRESH_COOKIE = 'refresh_token'
+
+
+REST_AUTH_SERIALIZERS = {
+    'USER_DETAILS_SERIALIZER': 'users.serializers.CustomUserDetailSerializer',
+}
+
+# EMAIL
+
+#EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+#EMAIL_HOST = 'smtp.gmail.com'
+#EMAIL_HOST_USER = config('EMAIL')
+#EMAIL_HOST_PASSWORD = config('EMAIL_PASSWORD') 
+#EMAIL_PORT = 587
+#EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'care.dhaka@decathlon.com'
+
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",    
+]
+
+CORS_ALLOW_CREDENTIALS = True
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+
